@@ -1,6 +1,6 @@
 <?php
 
-//secillo método para dibujar un tablero y su contenido
+//sencillo método para dibujar un tablero y su contenido
 function printBoard(array $board): void
 {
     echo "+---+---+---+\n" .
@@ -48,12 +48,12 @@ function wins(array $board, string $turn): bool
 
     //comprobar las columnas
     for ($i = 0; !$win && $i < 3; $i++) {
-        $win = $board[$i][0] == $turn && $board[$i][1] == $turn && $board[$i][2] == $turn ? true : false;
+        $win = $board[0][$i] == $turn && $board[1][$i] == $turn && $board[2][$i] == $turn ? true : false;
     }
 
     if (!$win && (
         //comprobar diagonal izquierda derecha 
-        ($board[0][0] == $turn && $board[1][1] == $turn && $board[2][2]) == $turn ||
+        ($board[0][0] == $turn && $board[1][1] == $turn && $board[2][2] == $turn) ||
         //comprobar diagonal derecha izquerda
         ($board[0][2] == $turn && $board[1][1] == $turn && $board[2][0] == $turn)
     )) {
@@ -83,7 +83,7 @@ function TurnCycle(array &$board, string &$turn): string
 
     //recoger la posicion, validarla y asignarla
     do {
-        $position = readline("Escoja la posición: ");
+        $position = readline("Escoja una posición: ");
     } while (!validPosition($board, $position)); //se comprueba si la posción está ocupada
 
     //sabemos que posición es válida para marcar
@@ -127,10 +127,10 @@ do {
         $winner = TurnCycle($board, $turn);
     } while ($winner == "");
 
-    echo $winner == "d" ? "Ha habido un empate\n" : "Ha ganado: " . $winner . "\n"; ;
+    echo $winner == "d" ? "Ha habido un empate\n" : "Ha ganado: " . $winner . "\n";;
 
     //se pregunta por otra partida
     do {
-        $repeat = mb_strtolower(readline("¿Quiere jugar otra partida? Conteste s/n\n"), "utf-8");
+        $repeat = mb_strtolower(readline("¿Quiere jugar otra partida? Conteste s/n: "), "utf-8");
     } while ($repeat != "s" && $repeat != "n");
 } while ($repeat == "s");
